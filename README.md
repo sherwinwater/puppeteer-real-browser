@@ -27,7 +27,9 @@
   <img src="https://img.shields.io/github/license/zfcsoftware/puppeteer-real-browser" alt="License" />
 </p>
 
+## Sponsor
 
+[![Capsolver](data/capsolver.png)](https://www.capsolver.com/?utm_source=github&utm_medium=repo&utm_campaign=scraping&utm_term=puppeteer-real-browser)
 
 ## Installation
 
@@ -109,6 +111,7 @@ test()
 **headless**: The default value is false. Values such as “new”, true, “shell” can also be sent, but it works most stable when false is used.
 
 **args:** If there is an additional flag you want to add when starting Chromium, you can send it with this string.
+Supported flags: https://github.com/GoogleChrome/chrome-launcher/blob/main/docs/chrome-flags-for-tools.md
 
 **customConfig:** https://github.com/GoogleChrome/chrome-launcher The browser is initialized with this library. What you send with this object is added as a direct initialization argument. You should use the initialization values in this repo. You should set the userDataDir option here and if you want to specify a custom chrome path, you should set it with the chromePath value.
 
@@ -187,6 +190,12 @@ This library is completely open source and is constantly being updated. Please s
 
 ## Quick Questions and Answers
 
+### I Cannot Access Functions in Window Object What Should I Do?
+
+This problem is probably caused by the runtime being closed by the rebrowser used. 
+https://github.com/zfcsoftware/puppeteer-real-browser/tree/access-window
+I created a branch for this. You can access the value you want by adding javascript to the page source with puppeteer-intercept-and-modify-requests as done in success.js. If you know about the Chrome plugin, you can also use it.
+
 ### page.setViewport method is not working, what should I do?
 As with the initialization arguments in the test module, you can set the defaultViewport in connectOption. If you set null, it will take up as much space as the width of the Browser.
 
@@ -196,7 +205,14 @@ using puppeteer-core patched with rebrowser. Tested with the challenging sites i
 The ghost-cursor is included in the library. (https://github.com/zfcsoftware/puppeteer-real-browser/blob/2a5fba37a85c15625fb3c8d1f7cf8dcb109b9492/lib/cjs/module/pageController.js#L54) You can use ghost-cursor with page.realCursor. page.click It is recommended to use page.realClick instead of page.click.
 
 ### What Makes This Library Special?
-This library does not have any amazing features. I apply patches created to avoid current bot detection systems, and it is the people who make these patches who should be thanked. This library is just to make your work easier and keep you up to date. There are my contributions in it, but the main contributors are under the “thanks” heading. Please star those repos and support the authors. Thank you.
+This library lets you launch and use Chrome in its most natural state. It tries to get the best results with minimal patching. Thanks to @nwebson who fixed the Runtime.enable issue from this point. If using rebrowser solves your problem, I don't recommend using real browser. 
+
+Real browser does not give you full control over launching. It launches Chrome with Chrome launcher and connects to it with rebrowser.
+
+### Why can't I pass Recaptcha v3?
+https://stackoverflow.com/questions/52546045/how-to-pass-recaptcha-v3
+
+Please see the answers in the link above. When there is no Google session, no matter how good your browser is, recaptcha identifies you as a bot. It is a common problem.
 
 ## License
 
@@ -207,16 +223,9 @@ Distributed under the MIT License. See [LICENSE](https://github.com/zfcsoftware/
 **Contributions to the current version**
 
 * **rebrowser™** - [rebrowser™](https://github.com/rebrowser) - *Created a patch pack for Runtime, which left many traces behind. Since Runtime was not used, most problems were solved. TargetFilter, which was used in the past and caused many problems, was switched to this patch. The Puppeteer-core library was patched and added to this repo. A lot of good bot detection systems are not caught thanks to rebrowser. Please star the rebrowser repo. Thank you. (https://github.com/rebrowser/rebrowser-patches)*
-* 
+
 * **Skill Issue™** - [TheFalloutOf76](https://github.com/TheFalloutOf76) - *He realized that mouse movements could not be simulated accurately and created a solution for this. His solution is used in this library. (https://github.com/TheFalloutOf76/CDP-bug-MouseEvent-.screenX-.screenY-patcher)*
   
-
-**For older versions**
-
-* **Jimmy Laurent** - [Jimmy Laurent](https://github.com/JimmyLaurent) - *Inspired by cloudflare-scraper library*
-* **CrispyyBaconx** - [CrispyyBaconx](https://github.com/CrispyyBaconx) - *Contributed to converting this library to Typescript*
-* **Pavle Aleksic** - [pavlealeksic](https://github.com/pavlealeksic) - *We change the fingerprint with the puppeteer-afp library.*
-
 ## Disclaimer of Liability
 
 No responsibility is accepted for the use of this software. This software is intended for educational and informational purposes only. Users should use this software at their own risk. The developer cannot be held liable for any damages that may result from the use of this software.
