@@ -6,4 +6,5 @@ services:
       dockerfile: Dockerfile 
     volumes:
       - .:/app
+      - /app/node_modules
     working_dir: /app
