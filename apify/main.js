@@ -1,6 +1,35 @@
-import { writeFile, readFile, access } from 'fs/promises';
-import puppeteer from 'puppeteer';
-import { newInjectedPage } from 'fingerprint-injector';
+// import { writeFile, readFile, access } from 'fs/promises';
+// import puppeteer from 'puppeteer';
+// import { newInjectedPage } from 'fingerprint-injector';
+
+// With CommonJS requires:
+const { writeFile, readFile, access } = require('fs').promises;
+const puppeteer = require('puppeteer');
+const { newInjectedPage } = require('fingerprint-injector');
+
+let Xvfb
+try {
+  Xvfb = require("xvfb");
+} catch {
+  // ignore
+}
+
+
+if (process.platform === "linux" ){
+    try {
+      xvfbsession = new Xvfb({
+        silent: true,
+        xvfb_args: ["-screen", "0", "1920x1080x24", "-ac"],
+      });
+      xvfbsession.startSync();
+      console.log('Xvfb started');
+    } catch (err) {
+      console.log(
+        "You are running on a Linux platform but do not have xvfb installed. The browser can be captured. Please install it with the following command\n\nsudo apt-get install xvfb\n\n" +
+          err.message
+      );
+    }
+  }
 
 async function appendToFile(filename, data) {
     try {
