@@ -30,12 +30,12 @@ const realBrowserOption = {
   connectOption: {
     defaultViewport: null,
   },
-  proxy: {
-    host: "proxy.apify.com",
-    port: "8000",
-    username: "gr",
-    password: "",
-  },
+//   proxy: {
+//     host: "proxy.apify.com",
+//     port: "8000",
+//     username: "gr",
+//     password: "",
+//   },
   plugins: [],
 };
 
