@@ -1,8 +1,9 @@
 version: '3.8'
 services:
   puppeteer:
-    platform: linux/amd64
-    image: puppeteer-real-browser-project
+    build:
+      context: .
+      dockerfile: Dockerfile 
     volumes:
       - .:/app
     working_dir: /app
