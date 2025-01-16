@@ -15,7 +15,8 @@
   "scripts": {
     "esm_test": "node ./test/esm/test.js",
     "cjs_test": "node ./test/cjs/test.js",
-    "main": "node ./test/cjs/main.js"
+    "main": "node ./test/cjs/main.js",
+    "start": "node ./index.js"
   },
   "keywords": [
     "cf-bypass",
