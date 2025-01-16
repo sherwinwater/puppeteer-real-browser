@@ -43,7 +43,9 @@
     "ghost-cursor": "^1.3.0",
     "puppeteer-extra": "^3.3.6",
     "rebrowser-puppeteer-core": "^23.3.1",
-    "tree-kill": "^1.2.2"
+    "tree-kill": "^1.2.2",
+    "fingerprint-injector": "^2.1.61",
+    "puppeteer": "^23.11.1"
   },
   "devDependencies": {
     "xvfb": "^0.4.0"
