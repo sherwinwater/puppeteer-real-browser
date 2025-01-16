@@ -36,4 +36,4 @@ EXPOSE 3000
 
 # Command to run the application
 # CMD ["npm", "run","start"]
-CMD ["sh", "-c", "npm run start && tail -f /dev/null"]
+CMD ["sh", "-c", "npm install && npm run start && tail -f /dev/null"]
