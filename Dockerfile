@@ -35,4 +35,4 @@ COPY . .
 EXPOSE 3000
 
 # Command to run the application
-CMD ["npm", "run","cjs_test"]
+CMD ["npm", "run","main"]
