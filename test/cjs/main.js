@@ -33,7 +33,7 @@ const realBrowserOption = {
   proxy: {
     host: "proxy.apify.com",
     port: "8000",
-    username: "groups-RESIDENTIAL,country-CA",
+    username: "gr",
     password: "",
   },
   plugins: [],
