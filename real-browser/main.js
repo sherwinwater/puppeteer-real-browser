@@ -7,7 +7,7 @@ const { writeFile, readFile, access } = require("fs/promises");
  * Scraping library 
  * (replace this with your actual import path)
  *********************/
-const { connect } = require("../../lib/cjs/index.js");
+const { connect } = require("../lib/cjs/index.js");
 
 // For demonstration; not strictly required here:
 const test = require("node:test");
