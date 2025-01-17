@@ -1,0 +1,58 @@
+# Use the official Amazon Linux image as the base image
+FROM amazonlinux:latest
+
+# Install necessary dependencies
+RUN yum update -y \
+    && yum install -y \
+    epel-release \
+    wget \
+    ca-certificates \
+    xorg-x11-server-Xvfb \
+    alsa-lib \
+    atk \
+    cups-libs \
+    gtk3 \
+    libXcomposite \
+    libXcursor \
+    libXi \
+    libXtst \
+    pango \
+    xorg-x11-fonts-Type1 \
+    curl \
+    tar \
+    bzip2 \
+    && yum clean all
+
+
+# Add the Google Chrome repository and install Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
+    && yum install -y ./google-chrome-stable_current_x86_64.rpm \
+    && rm -f google-chrome-stable_current_x86_64.rpm
+
+# Install Node.js
+RUN curl -sL https://rpm.nodesource.com/setup_16.x | bash - \
+    && yum install -y nodejs \
+    && yum clean all
+
+# Set npm registry
+RUN npm config set registry https://registry.npmjs.org/ \
+    && npm cache clean --force
+
+# Set up the working directory in the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install Node.js dependencies
+RUN npm update
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port your app runs on
+EXPOSE 3000
+
+# Command to run the application
+CMD ["sh", "-c", "npm install && npm run start && tail -f /dev/null"]
